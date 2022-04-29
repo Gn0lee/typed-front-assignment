@@ -136,7 +136,7 @@ const ResourceContainer = styled.div`
 
 const ResourceNameContainer = styled.div`
     width: 236px;
-    height: 45px;
+    height: 40px;
     font-size: 14px;
     margin: 12px 12px 0px 12px;
     pointer-events: none;
@@ -156,6 +156,7 @@ const EditNameContainer = styled.input`
     border: 1px solid #38A5E1;
     box-sizing: border-box;
     border-radius: 3px;
+    margin-bottom: 10px;
 `
 
 const IconContainer = styled.div`

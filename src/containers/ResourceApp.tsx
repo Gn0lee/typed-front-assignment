@@ -1,10 +1,10 @@
 import { useSelector , useDispatch } from "react-redux";
 import { RootState } from "../modules";
-import { selectResource } from "../modules/selector"
+import { selectResource } from "../modules/selectors"
 import { addResource, editResource, ImgInput, removeResource, UrlInput } from "../modules/resources";
 import ResourceList from "../components/ResourceApp/ResourceList";
 import ResourceAdd from "../components/ResourceApp/ResourceAdd";
-
+import styled from "styled-components";
 
 function ResourceApp(){
     const resources = useSelector((state: RootState) => state.resource);
@@ -27,13 +27,16 @@ function ResourceApp(){
     }
 
     return(
-        <>
+        <ResourceOverallContainer>
             <ResourceAdd onAdd={onAdd}/>
             <ResourceList resources={resources} onRemove={onRemove} onEdit={onEdit} onSelect={onSelect}/>
             
-        </>
+        </ResourceOverallContainer>
     );
 }
 
+const ResourceOverallContainer = styled.div`
+    
+`
 
 export default ResourceApp;

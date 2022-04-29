@@ -61,6 +61,7 @@ const AddContainer = styled.div`
     width: 280px;
     height: 50px;
     box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+    background-color: #FFFFFF;
     justify-content: space-around;
     align-items: center;
 `

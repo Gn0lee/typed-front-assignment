@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import resource from "./resources";
-import selector from "./selector";
+import selector from "./selectors";
 
 const rootReducer = combineReducers({
     resource,

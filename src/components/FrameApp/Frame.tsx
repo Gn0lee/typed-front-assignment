@@ -3,9 +3,10 @@ import styled from "styled-components";
 
 type FrameProps = {
     resource: UrlResource | ImgResource | undefined;
+    selectedImg: string;
 }
 
-function Frame({ resource }: FrameProps){
+function Frame({ resource, selectedImg }: FrameProps){
 
     console.log(resource);
     return(

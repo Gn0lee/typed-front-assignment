@@ -20,10 +20,13 @@ const MainContainer = styled.div`
   height: 800px;
   background-color: #F0F0F0;
   margin: auto;
+  margin-top: calc(50vh - 400px);
+  display: flex;
 `
 
 const ResourceViewerContainer = styled.div`
   width: 920px;
   heigth: 800px;
+  display: flex;
 `
 export default App;
