@@ -1,4 +1,3 @@
-//TODO: submit timeout 및 성공확률 추가, 정규표현식 확인
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { UrlInput, ImgInput, urlType, imgType} from "../../modules/resources"
@@ -9,7 +8,7 @@ type ResourceAddProps = {
 
 function ResourceAdd({ onAdd }: ResourceAddProps){
     
-    const urlReg = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
+    // const urlReg = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
     const youtubeReg = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     const [ isInput, setIsInput ] = useState(false);
     const [ inputUrl, setInputUrl ] = useState('');
@@ -25,13 +24,14 @@ function ResourceAdd({ onAdd }: ResourceAddProps){
 
     const handleUrlSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if(inputUrl.match(urlReg) !== null){
+        try{
+            const newUrl = new URL(inputUrl);
             const youtubeMatch = inputUrl.match(youtubeReg);
             const embedUrl = youtubeMatch && youtubeMatch[2].length === 11 ? "https://www.youtube.com/embed/" + youtubeMatch[2] : inputUrl;
             onAdd({name: inputUrl, url: embedUrl, type: urlType});
             setInputUrl("");
             setIsInput(false);
-        }else{
+        }catch{
             alert("올바른 url을 입력해 주세요.");
         }
     }
@@ -100,7 +100,7 @@ const UrlInputContainer = styled.input`
     width: 250px;
     height: 30px;
     left: calc(50vw - 585px);
-    top: 55px;
+    top: calc(50vh - 350px);
     background-color:#F7F7F7;
     border: 1px solid #38A5E1;
     box-sizing: border-box;

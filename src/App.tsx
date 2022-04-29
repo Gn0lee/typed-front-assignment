@@ -28,5 +28,6 @@ const ResourceViewerContainer = styled.div`
   width: 920px;
   heigth: 800px;
   display: flex;
+  flex-direction: column;
 `
 export default App;
