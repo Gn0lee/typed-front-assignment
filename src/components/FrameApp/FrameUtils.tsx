@@ -9,7 +9,7 @@ type FrameUtilsProps = {
 
 function FrameUtils({ onClose, resource }: FrameUtilsProps){
 
-
+    console.log("frame utils", resource);
     return(
         <div>
             

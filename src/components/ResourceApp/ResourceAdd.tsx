@@ -1,15 +1,14 @@
 //TODO: submit timeout 및 성공확률 추가, 정규표현식 확인
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
-import { UrlInput, ImgInput} from "../../modules/resources"
+import { UrlInput, ImgInput, urlType, imgType} from "../../modules/resources"
 
 type ResourceAddProps = {
     onAdd : (data: UrlInput | ImgInput) => void;
 }
 
 function ResourceAdd({ onAdd }: ResourceAddProps){
-    const url = "URL";
-    const img = "IMG";
+    
     const urlReg = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
     const youtubeReg = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     const [ isInput, setIsInput ] = useState(false);
@@ -29,7 +28,7 @@ function ResourceAdd({ onAdd }: ResourceAddProps){
         if(inputUrl.match(urlReg) !== null){
             const youtubeMatch = inputUrl.match(youtubeReg);
             const embedUrl = youtubeMatch && youtubeMatch[2].length === 11 ? "https://www.youtube.com/embed/" + youtubeMatch[2] : inputUrl;
-            onAdd({name: inputUrl, url: embedUrl, type: url});
+            onAdd({name: inputUrl, url: embedUrl, type: urlType});
             setInputUrl("");
             setIsInput(false);
         }else{
@@ -42,7 +41,7 @@ function ResourceAdd({ onAdd }: ResourceAddProps){
     }
 
     const handleImgChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        onAdd({name: e.target.files?.item(0)?.name, type: img, files: e.target.files})
+        onAdd({name: e.target.files?.item(0)?.name, type: imgType, files: e.target.files})
     }
 
     return(
@@ -96,11 +95,11 @@ const AddImgInput = styled.input`
 `
 
 const UrlInputContainer = styled.input`
-    position: relative;
+    position: absolute;
     width: 250px;
     height: 30px;
-    left: 15px;
-    bottom: 5px;
+    left: calc(50vw - 585px);
+    top: 55px;
     background-color:#F7F7F7;
     border: 1px solid #38A5E1;
     box-sizing: border-box;

@@ -2,13 +2,13 @@ import { createReducer, ActionType, createStandardAction } from "typesafe-action
 
 const SELECT_RESOURCE = "SELECT_RESOURCE";
 
-export const select = createStandardAction(SELECT_RESOURCE)<number>();
+export const selectResource = createStandardAction(SELECT_RESOURCE)<number>();
 
 type SelectorState = {
     id: number;
 };
 
-type SelectorAction = ActionType< typeof select>
+type SelectorAction = ActionType< typeof selectResource>
 
 const initialState: SelectorState = {
     id: 0

@@ -7,7 +7,7 @@ type FrameProps = {
 
 function Frame({ resource }: FrameProps){
 
-
+    console.log(resource);
     return(
         <div>
             
