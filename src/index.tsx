@@ -4,8 +4,9 @@ import App from './App';
 import { Provider } from 'react-redux';
 import { legacy_createStore as createStore } from 'redux';
 import rootReducer from './modules';
+import { composeWithDevTools } from "redux-devtools-extension";
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, composeWithDevTools());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

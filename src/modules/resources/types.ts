@@ -13,8 +13,20 @@ export type UrlResource = {
 export type ImgResource = {
     id : number;
     name : string;
-    files : [];
+    files : Array<object>;
     type : string;
+}
+
+export type UrlInput = {
+    name: string;
+    url: string;
+    type: string;
+}
+
+export type ImgInput = {
+    name: string;
+    files: Array<object>;
+    type: string;
 }
 
 export type ResourceState = (UrlResource | ImgResource)[];

@@ -1,5 +1,4 @@
-import { createStandardAction } from "typesafe-actions/dist/deprecated/create-standard-action";
-import { createReducer, ActionType } from "typesafe-actions";
+import { createReducer, ActionType, createStandardAction } from "typesafe-actions";
 
 const SELECT_RESOURCE = "SELECT_RESOURCE";
 

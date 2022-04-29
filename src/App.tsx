@@ -20,6 +20,7 @@ const MainContainer = styled.div`
   width: 1200px;
   height: 800px;
   background-color: #F0F0F0;
+  margin: auto
 `
 
 const ResourceListContainer = styled.div`

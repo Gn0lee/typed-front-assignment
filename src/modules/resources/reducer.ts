@@ -7,7 +7,7 @@ const initialState: ResourceState = [];
 const resource = createReducer<ResourceState,ResourceAction>(initialState,{
     [ADD_RESOURCE]: (state, action) => 
         state.concat({
-            ...action.payload.data,
+            ...action.payload,
         }),
     [REMOVE_RESOURCE]: (state, { payload : id }) =>
         state.filter(item => item.id !== id),

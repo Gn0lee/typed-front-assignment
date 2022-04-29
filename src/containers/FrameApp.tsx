@@ -8,8 +8,8 @@ import Frame from "../components/FrameApp/Frame";
 function FrameApp(){
     
     const {resources, selected} = useSelector((state: RootState) => ({resources:state.resource, selected: state.selector.id}));
-    if(selected) return null;
     const dispatch = useDispatch();
+    if(selected) return null;
     const resource = resources.find(elem => elem.id === selected);
 
     const onClose = () => {

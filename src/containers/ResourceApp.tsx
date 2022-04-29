@@ -1,6 +1,6 @@
 import { useSelector , useDispatch } from "react-redux";
 import { RootState } from "../modules";
-import { addResource, editResource, ImgResource, removeResource, UrlResource } from "../modules/resources";
+import { addResource, editResource, ImgInput, removeResource, UrlInput } from "../modules/resources";
 import ResourceList from "../components/ResourceApp/ResourceList";
 import ResourceAdd from "../components/ResourceApp/ResourceAdd";
 
@@ -8,7 +8,7 @@ function ResourceApp(){
     const resources = useSelector((state: RootState) => state.resource);
     const dispatch = useDispatch();
 
-    const onAdd = (data: UrlResource | ImgResource) => {
+    const onAdd = (data: UrlInput | ImgInput) => {
         dispatch(addResource(data));
     };
 
