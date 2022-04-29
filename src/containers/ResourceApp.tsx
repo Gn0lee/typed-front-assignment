@@ -7,7 +7,7 @@ import ResourceAdd from "../components/ResourceApp/ResourceAdd";
 function ResourceApp(){
     const resources = useSelector((state: RootState) => state.resource);
     const dispatch = useDispatch();
-
+    
     const onAdd = (data: UrlInput | ImgInput) => {
         dispatch(addResource(data));
     };

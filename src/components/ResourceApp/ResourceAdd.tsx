@@ -1,17 +1,7 @@
-import React, { useState } from "react";
+//TODO: submit timeout 및 성공확률 추가, 정규표현식 확인
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
-
-type UrlInput = {
-    name: string;
-    url: string;
-    type: string;
-}
-
-type ImgInput = {
-    name: string;
-    files: Array<object>;
-    type: string;
-}
+import { UrlInput, ImgInput} from "../../modules/resources"
 
 type ResourceAddProps = {
     onAdd : (data: UrlInput | ImgInput) => void;
@@ -20,35 +10,49 @@ type ResourceAddProps = {
 function ResourceAdd({ onAdd }: ResourceAddProps){
     const url = "URL";
     const img = "IMG";
+    const urlReg = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
+    const youtubeReg = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     const [ isInput, setIsInput ] = useState(false);
     const [ inputUrl, setInputUrl ] = useState('');
+    const imgFormRef = useRef<HTMLInputElement>(null);
     
-    const handleClick = () => {
+    const handleUrlClick = () => {
         setIsInput(!isInput);
+    }
+
+    const handleImgClick = () => {
+        imgFormRef.current?.click();
     }
 
     const handleUrlSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if(inputUrl !== ""){
-            onAdd({name: inputUrl, url: inputUrl, type: url});
+        if(inputUrl.match(urlReg) !== null){
+            const youtubeMatch = inputUrl.match(youtubeReg);
+            const embedUrl = youtubeMatch && youtubeMatch[2].length === 11 ? "https://www.youtube.com/embed/" + youtubeMatch[2] : inputUrl;
+            onAdd({name: inputUrl, url: embedUrl, type: url});
             setInputUrl("");
             setIsInput(false);
         }else{
-            alert("url을 입력해 주세요.");
+            alert("올바른 url을 입력해 주세요.");
         }
     }
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputUrl(e.target.value);
+    }
+
+    const handleImgChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        onAdd({name: e.target.files?.item(0)?.name, type: img, files: e.target.files})
     }
 
     return(
         <>
             <AddContainer>
-                <AddButton onClick={handleClick}>URL 추가</AddButton>
-                <AddButton>이미지 추가</AddButton>
+                <AddUrlButton onClick={handleUrlClick}>URL 추가</AddUrlButton>
+                <AddImgButton onClick={handleImgClick}>이미지 추가</AddImgButton>
+                <AddImgInput ref={imgFormRef} type="file" multiple accept="image/png, image/jpg" onChange={handleImgChange}/>
             </AddContainer>
-            {isInput ? <form onSubmit={handleUrlSubmit}><UrlInputContainer type="text" onChange={handleChange}/></form> : null}
+            {isInput ? <form onSubmit={handleUrlSubmit}><UrlInputContainer type="text" onChange={handleUrlChange}/></form> : null}
         </>
     );
 }
@@ -62,7 +66,7 @@ const AddContainer = styled.div`
     align-items: center;
 `
 
-const AddButton = styled.button`
+const AddUrlButton = styled.button`
     width: 125px;
     height: 30px;
     background-color: #FFFFFF;
@@ -70,6 +74,25 @@ const AddButton = styled.button`
     box-sizing: border-box;
     border-radius: 5px;
     cursor: pointer;
+`
+const AddImgButton = styled.button`
+    width: 125px;
+    height: 30px;
+    background-color: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    border-radius: 5px;
+    cursor: pointer;
+`
+const AddImgInput = styled.input`
+    width: 125px;
+    height: 30px;
+    background-color: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none;
 `
 
 const UrlInputContainer = styled.input`

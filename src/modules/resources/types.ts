@@ -12,8 +12,8 @@ export type UrlResource = {
 
 export type ImgResource = {
     id : number;
-    name : string;
-    files : Array<object>;
+    name: string | undefined;
+    files: FileList | null;
     type : string;
 }
 
@@ -24,8 +24,8 @@ export type UrlInput = {
 }
 
 export type ImgInput = {
-    name: string;
-    files: Array<object>;
+    name: string | undefined;
+    files: FileList | null;
     type: string;
 }
 
